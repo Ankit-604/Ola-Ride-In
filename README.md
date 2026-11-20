@@ -149,8 +149,8 @@ The database (`ola_bookings` table) captures **103,024 rides** across Bangalore 
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Number789Alpha/ola-ride-insights.git
-cd ola-ride-insights
+git clone https://github.com/Ankit-604/Ola-Ride-In.git
+cd Ola-Ride-In
 ```
 
 ### 2. Create and Activate Virtual Environment
@@ -186,7 +186,6 @@ Open **`http://localhost:8501`** in your browser.
 
 ## 👤 Author
 
-**Priyank Mishra**  
+**Ankit Kumar Sharma**  
 *Aspiring Data Analyst | Python • SQL • Pandas • Streamlit • Power BI*  
-* GitHub: [@Number789Alpha](https://github.com/Number789Alpha)
-
+* GitHub: [@Ankit-604](https://github.com/Ankit-604)
