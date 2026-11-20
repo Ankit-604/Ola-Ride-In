@@ -23,72 +23,126 @@ st.set_page_config(
 st.markdown("""
 <style>
     /* Global Styles */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
+        font-family: 'DM Sans', sans-serif;
     }
     
     /* Main Background */
     .stApp {
-        background-color: #0B0F19;
-        color: #F3F4F6;
+        background: radial-gradient(circle at 85% 0%, #332044 0%, #171322 42%, #11101A 100%);
+        color: #F8F5FF;
+    }
+
+    .main .block-container {
+        max-width: 1500px;
+        padding: 2rem 2.5rem 4rem;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: -0.02em;
     }
     
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background-color: #111827;
-        border-right: 1px solid #1F2937;
+        background: linear-gradient(180deg, #21152D 0%, #171322 72%);
+        border-right: 1px solid #463052;
+    }
+
+    [data-testid="stSidebar"] > div:first-child {
+        padding: 1.5rem 1rem;
+    }
+
+    [data-testid="stSidebar"] .stRadio > label,
+    [data-testid="stSidebar"] .stMultiSelect > label,
+    [data-testid="stSidebar"] .stDateInput > label {
+        color: #CFC5E3;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] {
+        gap: 0.35rem;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] label {
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 0.45rem 0.6rem;
+        transition: all 0.2s ease;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+        background: rgba(255, 138, 101, 0.12);
+        border-color: rgba(255, 138, 101, 0.4);
     }
     
     /* Brand Banner */
     .brand-header {
         display: flex;
         align-items: center;
-        gap: 16px;
-        padding: 18px 24px;
-        background: linear-gradient(135deg, #111827 0%, #1E293B 100%);
-        border: 1px solid #374151;
-        border-radius: 14px;
-        margin-bottom: 24px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        gap: 18px;
+        padding: 24px 28px;
+        background: linear-gradient(120deg, rgba(48, 29, 65, 0.96), rgba(29, 24, 48, 0.92));
+        border: 1px solid #594169;
+        border-radius: 20px;
+        margin-bottom: 22px;
+        box-shadow: 0 18px 45px rgba(7, 5, 14, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .brand-header::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        right: -70px;
+        top: -110px;
+        border-radius: 50%;
+        background: rgba(255, 138, 101, 0.15);
     }
     
     .brand-header img {
         height: 48px;
-        filter: drop-shadow(0 2px 8px rgba(210, 230, 3, 0.4));
+        filter: drop-shadow(0 3px 12px rgba(255, 138, 101, 0.45));
     }
     
     .brand-title {
         font-size: 26px;
         font-weight: 700;
-        color: #FFFFFF;
+        color: #FFF9F6;
         letter-spacing: -0.5px;
         margin: 0;
     }
     
     .brand-subtitle {
         font-size: 13px;
-        color: #9CA3AF;
+        color: #CFC5E3;
         margin: 2px 0 0 0;
     }
 
     /* About Section Callout */
     .about-box {
-        background: linear-gradient(90deg, rgba(210, 230, 3, 0.08) 0%, rgba(17, 24, 39, 0.6) 100%);
-        border-left: 4px solid #D2E603;
-        border-top: 1px solid #2A374A;
-        border-right: 1px solid #2A374A;
-        border-bottom: 1px solid #2A374A;
-        border-radius: 0 12px 12px 0;
-        padding: 16px 20px;
+        background: linear-gradient(100deg, rgba(255, 138, 101, 0.12) 0%, rgba(38, 29, 54, 0.72) 70%);
+        border-left: 4px solid #FF8A65;
+        border-top: 1px solid #4A365B;
+        border-right: 1px solid #4A365B;
+        border-bottom: 1px solid #4A365B;
+        border-radius: 14px;
+        padding: 16px 22px;
         margin-bottom: 24px;
     }
     
     .about-title {
         font-size: 15px;
         font-weight: 700;
-        color: #D2E603;
+        color: #FFAB91;
         text-transform: uppercase;
         letter-spacing: 0.8px;
         margin-bottom: 6px;
@@ -100,7 +154,7 @@ st.markdown("""
     .about-text {
         font-size: 14px;
         line-height: 1.6;
-        color: #E2E8F0;
+        color: #E8E0F2;
         margin: 0;
     }
 
@@ -113,23 +167,23 @@ st.markdown("""
     }
     
     .kpi-card {
-        background: #161F30;
-        border: 1px solid #26354A;
-        border-radius: 12px;
-        padding: 18px 20px;
-        transition: transform 0.2s ease, border-color 0.2s ease;
+        background: linear-gradient(145deg, #28203A, #211A31);
+        border: 1px solid #49385D;
+        border-radius: 16px;
+        padding: 20px 21px;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
     
     .kpi-card:hover {
         transform: translateY(-2px);
-        border-color: #D2E603;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        border-color: #FF8A65;
+        box-shadow: 0 10px 24px rgba(7, 5, 14, 0.35);
     }
     
     .kpi-label {
         font-size: 12px;
         font-weight: 600;
-        color: #94A3B8;
+        color: #B9ADCB;
         text-transform: uppercase;
         letter-spacing: 0.6px;
         margin-bottom: 6px;
@@ -138,27 +192,27 @@ st.markdown("""
     .kpi-value {
         font-size: 24px;
         font-weight: 700;
-        color: #FFFFFF;
+        color: #FFF9F6;
         margin-bottom: 4px;
     }
     
     .kpi-sub {
         font-size: 12px;
-        color: #10B981;
+        color: #63D6A0;
         font-weight: 500;
     }
     
     .kpi-sub-neg {
         font-size: 12px;
-        color: #F87171;
+        color: #FF8B8B;
         font-weight: 500;
     }
 
     /* Graph Explanation Box */
     .explanation-card {
-        background: #111B2B;
-        border: 1px solid #1F2D42;
-        border-radius: 10px;
+        background: rgba(34, 26, 49, 0.86);
+        border: 1px solid #403252;
+        border-radius: 14px;
         padding: 16px 20px;
         margin-top: 10px;
         margin-bottom: 26px;
@@ -167,7 +221,7 @@ st.markdown("""
     .explanation-heading {
         font-size: 13px;
         font-weight: 700;
-        color: #60A5FA;
+        color: #70D6FF;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-bottom: 8px;
@@ -176,14 +230,14 @@ st.markdown("""
     .explanation-body {
         font-size: 13.5px;
         line-height: 1.6;
-        color: #CBD5E1;
+        color: #D7CCE6;
         margin-bottom: 6px;
     }
     
     .insight-badge {
         display: inline-block;
-        background: rgba(96, 165, 250, 0.15);
-        color: #93C5FD;
+        background: rgba(112, 214, 255, 0.14);
+        color: #9BE2FF;
         padding: 2px 8px;
         border-radius: 4px;
         font-weight: 600;
@@ -193,8 +247,8 @@ st.markdown("""
     
     .recommend-badge {
         display: inline-block;
-        background: rgba(210, 230, 3, 0.15);
-        color: #D2E603;
+        background: rgba(255, 138, 101, 0.14);
+        color: #FFAB91;
         padding: 2px 8px;
         border-radius: 4px;
         font-weight: 600;
@@ -204,13 +258,13 @@ st.markdown("""
 
     /* SQL Studio Container */
     .sql-code-box {
-        background: #0D131F;
-        border: 1px solid #202E44;
+        background: #120F1B;
+        border: 1px solid #49385D;
         border-radius: 8px;
         padding: 14px;
         font-family: 'Consolas', 'Courier New', monospace;
         font-size: 13px;
-        color: #A5F3FC;
+        color: #BDEBFF;
         overflow-x: auto;
     }
 </style>
@@ -276,7 +330,7 @@ with st.sidebar:
         else:
             st.markdown("## 🚕")
     with col_logo2:
-        st.markdown("<h3 style='margin:0; color:#FFFFFF; font-weight:800; letter-spacing:1px;'>OLA MOBILITY</h3><span style='color:#9CA3AF; font-size:12px;'>Executive Analytics v2.4</span>", unsafe_allow_html=True)
+        st.markdown("<h3 style='margin:0; color:#FFF9F6; font-weight:800; letter-spacing:1px;'>OLA MOBILITY</h3><span style='color:#CFC5E3; font-size:12px;'>Executive Analytics v2.4</span>", unsafe_allow_html=True)
         
     st.markdown("---")
     
@@ -294,7 +348,7 @@ with st.sidebar:
     selected_page = st.radio("Navigation View", menu_options, index=0)
     
     st.markdown("---")
-    st.markdown("<h4 style='color:#D2E603; font-size:14px; text-transform:uppercase;'>Global Data Slicers</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color:#FFAB91; font-size:14px; text-transform:uppercase;'>Global Data Slicers</h4>", unsafe_allow_html=True)
     
     min_date = df_raw['Date_Only'].min()
     max_date = df_raw['Date_Only'].max()
@@ -321,7 +375,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.markdown("<div style='font-size:12px; color:#6B7280; text-align:center;'>Enterprise BI Dashboard © 2024 OLA Mobility Analytics</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:12px; color:#8F82A4; text-align:center;'>Enterprise BI Dashboard © 2024 OLA Mobility Analytics</div>", unsafe_allow_html=True)
 
 # Apply Filtered Slice
 if isinstance(date_range, (list, tuple)) and len(date_range) == 2:
@@ -340,23 +394,23 @@ if selected_statuses:
 # COLOR PALETTE FOR OLA CHARTS
 # -----------------------------------------------------------------------------
 OLA_COLORS = {
-    'Success': '#10B981',             # Emerald Green
-    'Canceled by Driver': '#EF4444',   # Red
-    'Canceled by Customer': '#F59E0B', # Amber/Orange
-    'Driver Not Found': '#6B7280',     # Gray
-    'Primary': '#D2E603',              # OLA Neon Lime
-    'Secondary': '#3B82F6',            # Blue
-    'Dark_Bg': '#0B0F19',
-    'Card_Bg': '#161F30'
+    'Success': '#63D6A0',
+    'Canceled by Driver': '#FF7676',
+    'Canceled by Customer': '#FFB86B',
+    'Driver Not Found': '#9889AD',
+    'Primary': '#FF8A65',
+    'Secondary': '#70D6FF',
+    'Dark_Bg': '#171322',
+    'Card_Bg': '#28203A'
 }
 
 CHART_THEME = {
     'layout': go.Layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(color='#E2E8F0', family='Inter'),
-        xaxis=dict(showgrid=True, gridcolor='#1E293B', zeroline=False),
-        yaxis=dict(showgrid=True, gridcolor='#1E293B', zeroline=False),
+        font=dict(color='#E8E0F2', family='DM Sans'),
+        xaxis=dict(showgrid=True, gridcolor='#3B2E4C', zeroline=False),
+        yaxis=dict(showgrid=True, gridcolor='#3B2E4C', zeroline=False),
         margin=dict(l=40, r=40, t=50, b=40),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
@@ -464,7 +518,7 @@ if selected_page == "📊 01 - Overall Performance":
         fig_vol.add_trace(go.Scatter(
             x=daily_trend['Date_Only'], y=daily_trend['Successful_Bookings'],
             mode='lines', name='Completed Trips',
-            line=dict(color='#D2E603', width=3),
+            line=dict(color='#FF8A65', width=3),
             fill='tozeroy', fillcolor='rgba(210, 230, 3, 0.08)'
         ))
         fig_vol.update_layout(
@@ -644,7 +698,7 @@ elif selected_page == "🚗 02 - Vehicle Analysis":
         with cols[i % 7]:
             st.markdown(f"""
             <div class="kpi-card" style="padding:12px; text-align:center;">
-                <div style="font-size:12px; font-weight:700; color:#D2E603; margin-bottom:4px;">{v_name}</div>
+                <div style="font-size:12px; font-weight:700; color:#FFAB91; margin-bottom:4px;">{v_name}</div>
                 <div style="font-size:18px; font-weight:700; color:#FFFFFF;">{row['Total_Trips']:,}</div>
                 <div style="font-size:11px; color:#94A3B8;">Avg: {row['Avg_Dist']:.1f} KM</div>
                 <div style="font-size:11px; color:#10B981;">₹{row['Total_Val']/1e6:.2f}M</div>
@@ -711,7 +765,7 @@ elif selected_page == "🚗 02 - Vehicle Analysis":
         ))
         fig_val.add_trace(go.Bar(
             x=merged_val['Vehicle_Type'], y=merged_val['Success_Val'],
-            name='Realized Successful Value', marker_color='#D2E603'
+            name='Realized Successful Value', marker_color='#FF8A65'
         ))
         fig_val.update_layout(
             barmode='group', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
@@ -922,7 +976,7 @@ elif selected_page == "💰 03 - Revenue Analysis":
     fig_daily_rev.add_trace(go.Scatter(
         x=daily_rev['Date_Only'], y=daily_rev['Distance'],
         name='Daily Distance Covered (KM)', yaxis='y2',
-        mode='lines+markers', line=dict(color='#D2E603', width=3)
+        mode='lines+markers', line=dict(color='#FF8A65', width=3)
     ))
     fig_daily_rev.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
@@ -1190,7 +1244,7 @@ elif selected_page == "⭐ 05 - Ratings Analysis":
         st.subheader("👨‍✈️ Driver Ratings Distribution")
         fig_dr_dist = px.histogram(
             rated_df, x='Driver_Ratings', nbins=20,
-            color_discrete_sequence=['#D2E603'],
+            color_discrete_sequence=['#FF8A65'],
             labels={'Driver_Ratings': 'Driver Rating Score'}
         )
         fig_dr_dist.update_layout(
@@ -1254,7 +1308,7 @@ elif selected_page == "⭐ 05 - Ratings Analysis":
     ))
     fig_rate_comp.add_trace(go.Bar(
         x=veh_rate['Vehicle_Type'], y=veh_rate['Avg_Driver_Rating'],
-        name='Avg Driver Rating (Rated by Rider)', marker_color='#D2E603'
+        name='Avg Driver Rating (Rated by Rider)', marker_color='#FF8A65'
     ))
     fig_rate_comp.update_layout(
         barmode='group', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
@@ -1482,4 +1536,3 @@ elif selected_page == "📑 Preprocessing & Data Architecture":
     st.markdown("---")
     st.subheader("📊 Dataset Overview Sample")
     st.dataframe(df_raw.head(10), use_container_width=True)
-
